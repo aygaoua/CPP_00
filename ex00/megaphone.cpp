@@ -6,7 +6,7 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 02:24:17 by azgaoua           #+#    #+#             */
-/*   Updated: 2023/12/24 02:54:40 by azgaoua          ###   ########.fr       */
+/*   Updated: 2023/12/24 03:03:40 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int main(int ac, char **av)
 				}
 				std::cout << str;
 			}
+			std::cout << std::endl;
 	}
-	std::cout << std::endl;
 }
