@@ -6,14 +6,14 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:17:06 by azgaoua           #+#    #+#             */
-/*   Updated: 2023/12/29 06:21:59 by azgaoua          ###   ########.fr       */
+/*   Updated: 2023/12/30 18:21:05 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook() {
-    std::cout << "PhoneBook created" << std::endl;
+    // std::cout << "PhoneBook created" << std::endl;
 }
 
 void PhoneBook::printWelcome() {
@@ -29,28 +29,30 @@ void PhoneBook::addContact(Contact contact) {
     static int _nbContacts = 0;
 
     std::cout << "Enter first name: ";
-    std::cin >> first_name;
+    std::getline(std::cin, first_name);
     contact.setFirstName(first_name);
     std::cout << "Enter last name: ";
-    std::cin >> last_name;
+    std::getline(std::cin, last_name);
     contact.setLastName(last_name);
     std::cout << "Enter nickname: ";
-    std::cin >> nickname;
+    std::getline(std::cin, nickname);
     contact.setNickname(nickname);
     std::cout << "Enter phone number: ";
-    std::cin >> phone_number;
+    std::getline(std::cin, phone_number);
     contact.setPhoneNumber(phone_number);
-    std::cout << "Contact added" << std::endl;
+    std::cout << "Enter darkest secret: ";
+    std::getline(std::cin, darkest_secret);
+    contact.setDarkestSecret(darkest_secret);
+    std::cout << "Contact " << _nbContacts << " added" << std::endl;
+    _nbContacts %= 8;
+    if (_nbContacts > this->_nb_contacts)
+        this->_nb_contacts = _nbContacts;
     _contacts[_nbContacts] = contact;
     _nbContacts++;
 }
 
-void PhoneBook::getContact(int index) {
-    std::cout << "Getting contact" << std::endl;
-    std::cout << "First name: " << PhoneBook::_contacts[index].getFirstName() << std::endl;
-    std::cout << "Last name: " << PhoneBook::_contacts[index].getLastName() << std::endl;
-    std::cout << "Nickname: " << PhoneBook::_contacts[index].getNickname() << std::endl;
-    std::cout << "Phone number: " << PhoneBook::_contacts[index].getPhoneNumber() << std::endl;
+Contact PhoneBook::getContact(int index) {
+    return this->_contacts[index];
 }
 
 void PhoneBook::searchContact(int index) {
@@ -63,10 +65,6 @@ void PhoneBook::searchContact(int index) {
 
 }
 
-void PhoneBook::printContact(Contact contact) {
-    std::cout << "Printing contact" << std::endl;
-}
-
 void PhoneBook::printContactField(std::string field) {
     std::cout << field << std::endl;
 }
@@ -76,26 +74,43 @@ void PhoneBook::exit() {
 }
 
 PhoneBook::~PhoneBook() {
-    std::cout << "PhoneBook destroyed" << std::endl;
+    // std::cout << "PhoneBook destroyed" << std::endl;
 }
 
 int main() {
-    PhoneBook phonebook;
+    PhoneBook phone;
 
     while (1) {
         std::string command;
         std::cout << "Enter a command: ";
         std::cin >> command;
         if (command == "EXIT")
-            phonebook.exit();
+            phone.exit();
         else if (command == "ADD")
-            phonebook.addContact(Contact());
+            phone.addContact(Contact());
         else if (command == "SEARCH")
         {
             int index;
+            std::cout << " _____________________________________________________" << std::endl;
+            std::cout << "|index: |first name:    |last name:   |nickname:     |" << std::endl;
+            for (int i = 0; i < 8; i++)
+            {
+                std::cout << i << "|";
+                std::cout << phone.getContact(i).getFirstName();
+                std::cout << "      |";
+                std::cout << phone.getContact(i).getLastName();
+                std::cout << "      |";
+                std::cout << phone.getContact(i).getNickname();
+                std::cout << "      |";
+                std::cout << phone.getContact(i).getPhoneNumber();
+                std::cout << "      |" << std::endl;
+            }   
+            std::cout << "______________________________________________" << std::endl;
+
             std::cout << "Enter index: ";
             std::cin >> index;
-            phonebook.getContact(index);
+            phone.getContact(index);
+
         }
         else
             std::cout << "Invalid command" << std::endl;

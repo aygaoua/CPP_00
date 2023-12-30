@@ -6,14 +6,14 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:19:41 by azgaoua           #+#    #+#             */
-/*   Updated: 2023/12/30 01:23:25 by azgaoua          ###   ########.fr       */
+/*   Updated: 2023/12/30 18:20:09 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
 Contact::Contact() {
-    std::cout << "Contact created" << std::endl;
+    // std::cout << "Contact created" << std::endl;
 }
 
 void Contact::setFirstName(std::string first_name) {
@@ -57,7 +57,7 @@ std::string Contact::getDarkestSecret() {
 }
 
 Contact::~Contact() {
-    std::cout << "Contact destroyed" << std::endl;
+    // std::cout << "Contact destroyed" << std::endl;
 }
 
 // int main() {
