@@ -6,7 +6,7 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:19:23 by azgaoua           #+#    #+#             */
-/*   Updated: 2023/12/29 01:34:04 by azgaoua          ###   ########.fr       */
+/*   Updated: 2023/12/30 01:23:18 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ private:
     std::string _last_name;
     std::string _nickname;
     std::string _phone_number;
-    std::string _dakest_secret;
+    std::string _darkest_secret;
 public:
     Contact();
     ~Contact();
@@ -29,7 +29,12 @@ public:
     void setLastName(std::string last_name);
     void setNickname(std::string nickname);
     void setPhoneNumber(std::string phone_number);
-    void setDakestSecret(std::string darkest_secret);
+    void setDarkestSecret(std::string darkest_secret);
+    std::string getFirstName();
+    std::string getLastName();
+    std::string getNickname();
+    std::string getPhoneNumber();
+    std::string getDarkestSecret();
 };
 
 #endif

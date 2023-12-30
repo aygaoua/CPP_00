@@ -6,7 +6,7 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:17:06 by azgaoua           #+#    #+#             */
-/*   Updated: 2023/12/29 02:17:55 by azgaoua          ###   ########.fr       */
+/*   Updated: 2023/12/29 06:21:59 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void PhoneBook::addContact(Contact contact) {
     std::string nickname;
     std::string phone_number;
     std::string darkest_secret;
+    static int _nbContacts = 0;
 
     std::cout << "Enter first name: ";
     std::cin >> first_name;
@@ -40,20 +41,26 @@ void PhoneBook::addContact(Contact contact) {
     std::cin >> phone_number;
     contact.setPhoneNumber(phone_number);
     std::cout << "Contact added" << std::endl;
+    _contacts[_nbContacts] = contact;
+    _nbContacts++;
 }
 
-void PhoneBook::searchContact() {
+void PhoneBook::getContact(int index) {
+    std::cout << "Getting contact" << std::endl;
+    std::cout << "First name: " << PhoneBook::_contacts[index].getFirstName() << std::endl;
+    std::cout << "Last name: " << PhoneBook::_contacts[index].getLastName() << std::endl;
+    std::cout << "Nickname: " << PhoneBook::_contacts[index].getNickname() << std::endl;
+    std::cout << "Phone number: " << PhoneBook::_contacts[index].getPhoneNumber() << std::endl;
+}
+
+void PhoneBook::searchContact(int index) {
     std::cout << "Searching contact" << std::endl;
 
-    std::cout << "Enter a field: ";
-    std::string field;
-    std::cin >> field;
-    printContactField(field);
+    std::cout << "First name: " << PhoneBook::_contacts[index].getFirstName() << std::endl;
+    std::cout << "Last name: " << PhoneBook::_contacts[index].getLastName() << std::endl;
+    std::cout << "Nickname: " << PhoneBook::_contacts[index].getNickname() << std::endl;
+    std::cout << "Phone number: " << PhoneBook::_contacts[index].getPhoneNumber() << std::endl;
 
-    std::cout << "Enter a contact index: ";
-    int index;
-    std::cin >> index;
-    printContact(_contacts[index]);
 }
 
 void PhoneBook::printContact(Contact contact) {
@@ -84,13 +91,16 @@ int main() {
         else if (command == "ADD")
             phonebook.addContact(Contact());
         else if (command == "SEARCH")
-            phonebook.searchContact();
+        {
+            int index;
+            std::cout << "Enter index: ";
+            std::cin >> index;
+            phonebook.getContact(index);
+        }
         else
             std::cout << "Invalid command" << std::endl;
     }
-
-
-    return 0;
+    return (0);
 }
 
 
