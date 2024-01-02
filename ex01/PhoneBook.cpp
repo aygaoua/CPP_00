@@ -6,7 +6,7 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:17:06 by azgaoua           #+#    #+#             */
-/*   Updated: 2023/12/30 21:15:36 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/02 22:29:17 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,45 @@ void PhoneBook::addContact(Contact contact) {
 
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cout << "Enter first name: ";
-    std::getline(std::cin, first_name);
+    while (first_name == "")
+    {
+        std::cout << "Enter first name: ";
+        std::getline(std::cin, first_name);
+        if (first_name == "")
+            std::cout << "Invalid first name" << std::endl;
+    }
     contact.setFirstName(first_name);
-    std::cout << "Enter last name: ";
-    std::getline(std::cin, last_name);
+    while (last_name == "")
+    {
+        std::cout << "Enter last name: ";
+        std::getline(std::cin, last_name);
+        if (last_name == "")
+            std::cout << "Invalid last name" << std::endl;
+    }
     contact.setLastName(last_name);
-    std::cout << "Enter nickname: ";
-    std::getline(std::cin, nickname);
+    while (nickname == "")
+    {
+        std::cout << "Enter nickname: ";
+        std::getline(std::cin, nickname);
+        if (nickname == "")
+            std::cout << "Invalid nickname" << std::endl;
+    }
     contact.setNickname(nickname);
-    std::cout << "Enter phone number: ";
-    std::getline(std::cin, phone_number);
+    while (phone_number == "")
+    {
+        std::cout << "Enter phone number: ";
+        std::getline(std::cin, phone_number);
+        if (phone_number == "")
+            std::cout << "Invalid phone number" << std::endl;
+    }
     contact.setPhoneNumber(phone_number);
-    std::cout << "Enter darkest secret: ";
-    std::getline(std::cin, darkest_secret);
+    while (darkest_secret == "")
+    {
+        std::cout << "Enter darkest secret: ";
+        std::getline(std::cin, darkest_secret);
+        if (darkest_secret == "")
+            std::cout << "Invalid darkest secret" << std::endl;
+    }
     contact.setDarkestSecret(darkest_secret);
     std::cout << "Contact " << _nbContacts << " added" << std::endl;
     _nbContacts %= 8;
@@ -92,9 +117,10 @@ int main() {
             phone.addContact(Contact());
         else if (command == "SEARCH")
         {
-            int index;
+            int index = 0;
             std::cout << " ___________________________________________" << std::endl;
             std::cout << "|index:    |first name|last name:|nickname: |" << std::endl;
+            std::cout << " -------------------------------------------" << std::endl;
             for (int i = 0; i < 8; i++)
             {
                 std::cout << "| " << i << "        |";
@@ -115,33 +141,24 @@ int main() {
                 std::cout << "|";
                 std::cout << std::endl;
                 std::cout << " -------------------------------------------" << std::endl;
+            }
+            while ((phone.getContact(index).getFirstName() != "" && phone.getContact(index).getLastName() != "" && phone.getContact(index).getNickname() != "" && phone.getContact(index).getPhoneNumber() != "" && phone.getContact(index).getDarkestSecret() != "") || (index < 0 || index > 7))
+            {
+                std::cout << "Enter index: ";
+                std::cin >> index;
+                if (index < 0 || index > 7)
+                    std::cout << "Invalid index" << std::endl;
+                else if (phone.getContact(index).getFirstName() != "" && phone.getContact(index).getLastName() != "" && phone.getContact(index).getNickname() != "" && phone.getContact(index).getPhoneNumber() != "" && phone.getContact(index).getDarkestSecret() != "")
+                {
+                    std::cout << "first name : " << phone.getContact(index).getFirstName() << std::endl;
+                    std::cout << "last name : " << phone.getContact(index).getLastName() << std::endl;
+                    std::cout << "nickname : " << phone.getContact(index).getNickname() << std::endl;
+                    std::cout << "phone number : " << phone.getContact(index).getPhoneNumber() << std::endl;
+                    std::cout << "darkest secret : " << phone.getContact(index).getDarkestSecret() << std::endl;
+                }
+                else
+                    std::cout << "No contact at this index" << std::endl;
             }   
-            std::cout << "Enter index: ";
-            std::cin >> index;
-            std::cout << " ______________________________________________________" << std::endl;
-            std::cout << "|first name|last name:|nickname: |N. phone: |" << std::endl;
-            for (unsigned long j = 0; j <= 9 && phone.getContact(index).getFirstName()[j]; j++)
-                std::cout << phone.getContact(index).getFirstName()[j];
-            for (unsigned long j = 0; j < 10 - phone.getContact(index).getFirstName().length(); j++)
-                std::cout << " ";
-            std::cout << "|";
-            for (unsigned long j = 0; j <= 9 && phone.getContact(index).getLastName()[j]; j++)
-                std::cout << phone.getContact(index).getLastName()[j];
-            for (unsigned long j = 0; j < 10 - phone.getContact(index).getFirstName().length(); j++)
-                std::cout << " ";
-            std::cout << "|";
-            for (unsigned long j = 0; j <= 9 && phone.getContact(index).getNickname()[j]; j++)
-                std::cout << phone.getContact(index).getNickname()[j];
-            for (unsigned long j = 0; j < 10 - phone.getContact(index).getNickname().length(); j++)
-                std::cout << " ";
-            std::cout << "|";
-            for (unsigned long j = 0; j <= 9 && phone.getContact(index).getPhoneNumber()[j]; j++)
-                std::cout << phone.getContact(index).getPhoneNumber()[j];
-            // std::cout << phone.getContact(index).getPhoneNumber();
-            for (unsigned long j = 0; j < 10 - phone.getContact(index).getPhoneNumber().length(); j++)
-                std::cout << " ";
-            std::cout << "|" << std::endl;
-            std::cout << " ------------------------------------------------------" << std::endl;
         }
         else
             std::cout << "Invalid command" << std::endl;
