@@ -6,7 +6,7 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:16:44 by azgaoua           #+#    #+#             */
-/*   Updated: 2023/12/30 18:44:57 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/05 06:27:45 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ public:
     void printWelcome();
     void addContact(Contact contact);
     Contact getContact(int index);
+    int getNbContacts();
     void searchContact(int index);
     void printContactField(std::string field);
     void exit();
