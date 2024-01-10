@@ -6,7 +6,7 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:16:44 by azgaoua           #+#    #+#             */
-/*   Updated: 2024/01/05 06:27:45 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:17:02 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 
 class PhoneBook {
 public:
-    PhoneBook();
-    ~PhoneBook();
     void printWelcome();
     void addContact(Contact contact);
     Contact getContact(int index);

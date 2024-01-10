@@ -6,18 +6,14 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:17:06 by azgaoua           #+#    #+#             */
-/*   Updated: 2024/01/05 06:56:26 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/09 20:43:33 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook() {
-    // std::cout << "PhoneBook created" << std::endl;
-}
-
 void PhoneBook::printWelcome() {
-    std::cout << "Welcome to the PhoneBook" << std::endl;
+    std::cout << "------>>Welcome to the PhoneBook<<------" << std::endl;
 }
 
 void PhoneBook::addContact(Contact contact) {
@@ -26,7 +22,7 @@ void PhoneBook::addContact(Contact contact) {
     std::string nickname;
     std::string phone_number;
     std::string darkest_secret;
-    static int _nbContacts = 1;
+    static int _nbContacts = 0;
 
     while (first_name == "")
     {
@@ -68,8 +64,8 @@ void PhoneBook::addContact(Contact contact) {
             std::cout << "Invalid darkest secret" << std::endl;
     }
     contact.setDarkestSecret(darkest_secret);
-    std::cout << "Contact " << _nbContacts << " added" << std::endl;
-    _nbContacts %= 9;
+    std::cout << "Contact " << _nbContacts + 1 << " added" << std::endl;
+    _nbContacts %= 8;
     if (_nbContacts > this->_nb_contacts)
         this->_nb_contacts = _nbContacts;
     _contacts[_nbContacts] = contact;
@@ -101,13 +97,19 @@ void PhoneBook::exit() {
     std::cout << "Exiting PhoneBook" << std::endl;
 }
 
-PhoneBook::~PhoneBook() {
-    // std::cout << "PhoneBook destroyed" << std::endl;
+bool is_number(std::string str) {
+    for (unsigned long i = 0; i < str.length(); i++) {
+        if (!isdigit(str[i])) {
+            return false;
+        }
+    }
+    return true;
 }
 
 int main() {
     PhoneBook phone;
 
+    phone.printWelcome();
     while (1) {
         std::string command = "";
         std::cout << " ___________________________________________" << std::endl;
@@ -160,10 +162,23 @@ int main() {
                 std::cout << std::endl;
                 std::cout << " -------------------------------------------" << std::endl;
             }
-            while ((phone.getContact(index).getFirstName() != "" && phone.getContact(index).getLastName() != "" && phone.getContact(index).getNickname() != "" && phone.getContact(index).getPhoneNumber() != "" && phone.getContact(index).getDarkestSecret() != "") || (index < 1 || index > 8))
-            {
-                std::cout << "Enter index: ";
-                std::cin >> index;
+            while ((index < 1 || index > 8) || (phone.getContact(index).getFirstName() != "" && phone.getContact(index).getLastName() != "" && phone.getContact(index).getNickname() != "" && phone.getContact(index).getPhoneNumber() != "" && phone.getContact(index).getDarkestSecret() != ""))
+            {   
+                std::string index_s = "";
+                while (index_s == "")
+                {
+                    std::cout << "Enter index: ";
+                    std::getline(std::cin, index_s);
+                    if (index_s == "")
+                        std::cout << "Invalid index" << std::endl;
+                        continue;
+                }
+                if (!isdigit(index_s[0]) || index_s.length() != 1)
+                {
+                    std::cout << "Invalid index" << std::endl;
+                    continue;
+                }
+                index = index_s[0] - '0';
                 if (index < 1 || index > 8)
                 {
                     std::cout << "Invalid index" << std::endl;
@@ -181,7 +196,7 @@ int main() {
                 else
                 {
                     std::cout << "No contact at this index" << std::endl;
-                    continue;
+                    break;
                 }
             }   
         }

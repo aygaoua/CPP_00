@@ -6,7 +6,7 @@
 #    By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/24 03:45:56 by azgaoua           #+#    #+#              #
-#    Updated: 2023/12/29 01:42:23 by azgaoua          ###   ########.fr        #
+#    Updated: 2024/01/09 19:58:40 by azgaoua          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CXX = g++
 
 RM = rm -rf
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
 
 all :  $(NAME)
 
