@@ -6,14 +6,14 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:17:06 by azgaoua           #+#    #+#             */
-/*   Updated: 2024/01/09 20:43:33 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/12 06:21:40 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
 void PhoneBook::printWelcome() {
-    std::cout << "------>>Welcome to the PhoneBook<<------" << std::endl;
+    std::cout << "                                   ------->> Welcome to the PhoneBook <<-------" << std::endl;
 }
 
 void PhoneBook::addContact(Contact contact) {
@@ -22,7 +22,7 @@ void PhoneBook::addContact(Contact contact) {
     std::string nickname;
     std::string phone_number;
     std::string darkest_secret;
-    static int _nbContacts = 0;
+    static int _nbContacts = 1;
 
     while (first_name == "")
     {
@@ -64,17 +64,108 @@ void PhoneBook::addContact(Contact contact) {
             std::cout << "Invalid darkest secret" << std::endl;
     }
     contact.setDarkestSecret(darkest_secret);
-    std::cout << "Contact " << _nbContacts + 1 << " added" << std::endl;
-    _nbContacts %= 8;
+    _nbContacts %= 9;
+    if (_nbContacts == 0)
+        _nbContacts = 1;
+    std::cout << "Contact " << _nbContacts << " added" << std::endl;
     if (_nbContacts > this->_nb_contacts)
         this->_nb_contacts = _nbContacts;
-    _contacts[_nbContacts] = contact;
+    _contacts[_nbContacts - 1] = contact;
     _nbContacts++;
 }
 
 int PhoneBook::getNbContacts() {
     return this->_nb_contacts;
 }
+
+void PhoneBook::searchCommand(PhoneBook &phone) {
+    int index = 0;
+    std::cout << " ___________________________________________" << std::endl;
+    std::cout << "|index:    |first name|last name:|nickname: |" << std::endl;
+    std::cout << " -------------------------------------------" << std::endl;
+    for (int i = 0; i < phone.getNbContacts(); i++)
+    {
+        std::cout << "| " << i + 1 << "        |";
+        for (unsigned long j = 0; j <= 8 && phone.getContact(i).getFirstName()[j]; j++)
+            std::cout << phone.getContact(i).getFirstName()[j];
+        if (phone.getContact(i).getFirstName().length() >= 10)
+            std::cout << ".";
+        else
+        {
+            if (phone.getContact(i).getFirstName().length() == 10)
+                std::cout << phone.getContact(i).getFirstName()[9];
+            for (unsigned long j = 0; j < 10 - phone.getContact(i).getFirstName().length(); j++)
+                std::cout << " ";
+        }
+        std::cout << "|";
+        for (unsigned long j = 0; j <= 8 && phone.getContact(i).getLastName()[j]; j++)
+            std::cout << phone.getContact(i).getLastName()[j];
+        if (phone.getContact(i).getLastName().length() >= 10)
+            std::cout << ".";
+        else
+        {
+            if (phone.getContact(i).getLastName().length() == 10)
+                std::cout << phone.getContact(i).getLastName()[9];
+            for (unsigned long j = 0; j < 10 - phone.getContact(i).getLastName().length(); j++)
+                std::cout << " ";
+        }
+        std::cout << "|";
+        for (unsigned long j = 0; j <= 8 && phone.getContact(i).getNickname()[j]; j++)
+            std::cout << phone.getContact(i).getNickname()[j];
+        if (phone.getContact(i).getNickname().length() >= 10)
+            std::cout << ".";
+        else
+        {
+            if (phone.getContact(i).getNickname().length() == 10)
+                std::cout << phone.getContact(i).getNickname()[9];
+            for (unsigned long j = 0; j < 10 - phone.getContact(i).getNickname().length(); j++)
+                std::cout << " ";
+        }
+        std::cout << "|";
+        std::cout << std::endl;
+        std::cout << " -------------------------------------------" << std::endl;
+    }
+    while ((index < 1 || index > 8) || (phone.getContact(index).getFirstName() != "" && phone.getContact(index).getLastName() != "" && phone.getContact(index).getNickname() != "" && phone.getContact(index).getPhoneNumber() != "" && phone.getContact(index).getDarkestSecret() != ""))
+    {   
+        std::string index_s = "";
+        while (index_s == "")
+        {
+            std::cout << "Enter index: ";
+            std::getline(std::cin, index_s);
+            if (index_s == "")
+                std::cout << "Invalid index" << std::endl;
+            continue;
+        }
+        if (!isdigit(index_s[0]) || index_s.length() != 1)
+        {
+            std::cout << "Invalid index" << std::endl;
+            std::cout << "the range available is from 1 to 8" << std::endl;
+            continue;
+        }
+        index = index_s[0] - '0';
+        if (index < 1 || index > 8)
+        {
+            std::cout << "Invalid index" << std::endl;
+            std::cout << "the range available is from 1 to 8" << std::endl;
+            continue;
+        }
+        else if (phone.getContact(index - 1).getFirstName() != "" && phone.getContact(index - 1).getLastName() != "" && phone.getContact(index - 1).getNickname() != "" && phone.getContact(index - 1).getPhoneNumber() != "" && phone.getContact(index - 1).getDarkestSecret() != "")
+        {
+            std::cout << "first name : " << phone.getContact(index - 1).getFirstName() << std::endl;
+            std::cout << "last name : " << phone.getContact(index - 1).getLastName() << std::endl;
+            std::cout << "nickname : " << phone.getContact(index - 1).getNickname() << std::endl;
+            std::cout << "phone number : " << phone.getContact(index - 1).getPhoneNumber() << std::endl;
+            std::cout << "darkest secret : " << phone.getContact(index - 1).getDarkestSecret() << std::endl;
+            break;
+        }
+        else
+        {
+            std::cout << "No contact at this index" << std::endl;
+            break;
+        }
+    }
+}
+
 Contact PhoneBook::getContact(int index) {
     return this->_contacts[index];
 }
@@ -112,16 +203,20 @@ int main() {
     phone.printWelcome();
     while (1) {
         std::string command = "";
-        std::cout << " ___________________________________________" << std::endl;
-        std::cout << "|Commands: |ADD       |SEARCH    |EXIT      |" << std::endl;
-        std::cout << " -------------------------------------------" << std::endl;
         while (command != "ADD" && command != "SEARCH" && command != "EXIT")
         {
+            std::cout << "                                   ";
+            std::cout << "___________________________________________" << std::endl;
+            std::cout << "this is the supported commands :  ";
+            std::cout << "|Commands: |ADD       |SEARCH    |EXIT      |" << std::endl;
+            std::cout << "                                   ";
+            std::cout << "-------------------------------------------" << std::endl;
             std::cout << "Enter a command: ";
             getline(std::cin, command);
             if (command != "ADD" && command != "SEARCH" && command != "EXIT")
             {
-                std::cout << "Invalid command" << std::endl;
+                std::cout << "                                   ";
+                std::cout << "Invalid command !!" << std::endl;
                 continue;
             }
         }
@@ -137,71 +232,11 @@ int main() {
         }
         else if (command == "SEARCH")
         {
-            int index = 0;
-            std::cout << " ___________________________________________" << std::endl;
-            std::cout << "|index:    |first name|last name:|nickname: |" << std::endl;
-            std::cout << " -------------------------------------------" << std::endl;
-            for (int i = 1; i < phone.getNbContacts() + 1; i++)
-            {
-                std::cout << "| " << i << "        |";
-                for (unsigned long j = 0; j <= 9 && phone.getContact(i).getFirstName()[j]; j++)
-                    std::cout << phone.getContact(i).getFirstName()[j];
-                for (unsigned long j = 0; j < 10 - phone.getContact(i).getFirstName().length(); j++)
-                    std::cout << " ";
-                std::cout << "|";
-                for (unsigned long j = 0; j <= 9 && phone.getContact(i).getLastName()[j]; j++)
-                    std::cout << phone.getContact(i).getLastName()[j];
-                for (unsigned long j = 0; j < 10 - phone.getContact(i).getLastName().length(); j++)
-                    std::cout << " ";
-                std::cout << "|";
-                for (unsigned long j = 0; j <= 9 && phone.getContact(i).getNickname()[j]; j++)
-                    std::cout << phone.getContact(i).getNickname()[j];
-                for (unsigned long j = 0; j < 10 - phone.getContact(i).getNickname().length(); j++)
-                    std::cout << " ";
-                std::cout << "|";
-                std::cout << std::endl;
-                std::cout << " -------------------------------------------" << std::endl;
-            }
-            while ((index < 1 || index > 8) || (phone.getContact(index).getFirstName() != "" && phone.getContact(index).getLastName() != "" && phone.getContact(index).getNickname() != "" && phone.getContact(index).getPhoneNumber() != "" && phone.getContact(index).getDarkestSecret() != ""))
-            {   
-                std::string index_s = "";
-                while (index_s == "")
-                {
-                    std::cout << "Enter index: ";
-                    std::getline(std::cin, index_s);
-                    if (index_s == "")
-                        std::cout << "Invalid index" << std::endl;
-                        continue;
-                }
-                if (!isdigit(index_s[0]) || index_s.length() != 1)
-                {
-                    std::cout << "Invalid index" << std::endl;
-                    continue;
-                }
-                index = index_s[0] - '0';
-                if (index < 1 || index > 8)
-                {
-                    std::cout << "Invalid index" << std::endl;
-                    continue;
-                }
-                else if (phone.getContact(index).getFirstName() != "" && phone.getContact(index).getLastName() != "" && phone.getContact(index).getNickname() != "" && phone.getContact(index).getPhoneNumber() != "" && phone.getContact(index).getDarkestSecret() != "")
-                {
-                    std::cout << "first name : " << phone.getContact(index).getFirstName() << std::endl;
-                    std::cout << "last name : " << phone.getContact(index).getLastName() << std::endl;
-                    std::cout << "nickname : " << phone.getContact(index).getNickname() << std::endl;
-                    std::cout << "phone number : " << phone.getContact(index).getPhoneNumber() << std::endl;
-                    std::cout << "darkest secret : " << phone.getContact(index).getDarkestSecret() << std::endl;
-                    break;
-                }
-                else
-                {
-                    std::cout << "No contact at this index" << std::endl;
-                    break;
-                }
-            }   
+            phone.searchCommand(phone);
+            continue;
         }
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        // std::cin.clear();
+        // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     return (0);
 }
