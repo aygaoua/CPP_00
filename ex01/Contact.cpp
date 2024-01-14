@@ -12,9 +12,6 @@
 
 #include "Contact.hpp"
 
-Contact::Contact() {
-    // std::cout << "Contact created" << std::endl;
-}
 
 void Contact::setFirstName(std::string first_name) {
     this->_first_name = first_name;
@@ -59,8 +56,3 @@ std::string Contact::getDarkestSecret() {
 Contact::~Contact() {
     // std::cout << "Contact destroyed" << std::endl;
 }
-
-// int main() {
-//     Contact contact;
-//     return 0;
-// }

@@ -12,25 +12,25 @@
 
 NAME = phonebook
 
-OBJS = Contact.o Phonebook.o
+OBJS = Contact.o PhoneBook.o
 
-FILES = Contact.cpp Phonebook.cpp
+FILES = Contact.cpp PhoneBook.cpp
 
-CXX = g++
+CXX = c++
 
 RM = rm -rf
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 all :  $(NAME)
-
-%.o: %.cpp
-	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME) :  $(OBJS) $(FILES)
 	@echo "------>making the megaphone<------"
 	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	@echo "--------->megaphone Done<---------"
+
+%.o: %.cpp Phonebook.hpp
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	@echo " remove $(OBJS)"
