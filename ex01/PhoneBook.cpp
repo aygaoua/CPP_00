@@ -6,16 +6,19 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:17:06 by azgaoua           #+#    #+#             */
-/*   Updated: 2024/01/12 06:21:40 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/14 11:10:02 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
 void PhoneBook::printWelcome() {
-    std::cout << "                                   ------->> Welcome to the PhoneBook <<-------" << std::endl;
+    std::cout << "                                   ";
+    std::cout << "------->> Welcome to the PhoneBook <<-------" << std::endl;
 }
-
+PhoneBook::PhoneBook() {
+    _nb_contacts = 0;
+}
 void PhoneBook::addContact(Contact contact) {
     std::string first_name;
     std::string last_name;
@@ -28,7 +31,14 @@ void PhoneBook::addContact(Contact contact) {
     {
         std::cout << "Enter first name: ";
         std::getline(std::cin, first_name);
-        if (first_name == "")
+        if (feof(stdin))
+        {
+            std::cin.clear();
+            std::clearerr(stdin);
+            std::cout << std::endl;
+            continue;
+        }
+        else if (first_name == "")
             std::cout << "Invalid first name" << std::endl;
     }
     contact.setFirstName(first_name);
@@ -36,7 +46,14 @@ void PhoneBook::addContact(Contact contact) {
     {
         std::cout << "Enter last name: ";
         std::getline(std::cin, last_name);
-        if (last_name == "")
+        if (feof(stdin))
+        {
+            std::cin.clear();
+            std::clearerr(stdin);
+            std::cout << std::endl;
+            continue;
+        }
+        else if (last_name == "")
             std::cout << "Invalid last name" << std::endl;
     }
     contact.setLastName(last_name);
@@ -44,7 +61,14 @@ void PhoneBook::addContact(Contact contact) {
     {
         std::cout << "Enter nickname: ";
         std::getline(std::cin, nickname);
-        if (nickname == "")
+        if (feof(stdin))
+        {
+            std::cin.clear();
+            std::clearerr(stdin);
+            std::cout << std::endl;
+            continue;
+        }
+        else if (nickname == "")
             std::cout << "Invalid nickname" << std::endl;
     }
     contact.setNickname(nickname);
@@ -52,7 +76,14 @@ void PhoneBook::addContact(Contact contact) {
     {
         std::cout << "Enter phone number: ";
         std::getline(std::cin, phone_number);
-        if (phone_number == "")
+        if (feof(stdin))
+        {
+            std::cin.clear();
+            std::clearerr(stdin);
+            std::cout << std::endl;
+            continue;
+        }
+        else if (phone_number == "")
             std::cout << "Invalid phone number" << std::endl;
     }
     contact.setPhoneNumber(phone_number);
@@ -60,7 +91,14 @@ void PhoneBook::addContact(Contact contact) {
     {
         std::cout << "Enter darkest secret: ";
         std::getline(std::cin, darkest_secret);
-        if (darkest_secret == "")
+        if (feof(stdin))
+        {
+            std::cin.clear();
+            std::clearerr(stdin);
+            std::cout << std::endl;
+            continue;
+        }
+        else if (darkest_secret == "")
             std::cout << "Invalid darkest secret" << std::endl;
     }
     contact.setDarkestSecret(darkest_secret);
@@ -125,14 +163,26 @@ void PhoneBook::searchCommand(PhoneBook &phone) {
         std::cout << std::endl;
         std::cout << " -------------------------------------------" << std::endl;
     }
-    while ((index < 1 || index > 8) || (phone.getContact(index).getFirstName() != "" && phone.getContact(index).getLastName() != "" && phone.getContact(index).getNickname() != "" && phone.getContact(index).getPhoneNumber() != "" && phone.getContact(index).getDarkestSecret() != ""))
+    while ((index < 1 || index > 8) || \
+            (phone.getContact(index).getFirstName() != "" && \
+                phone.getContact(index).getLastName() != "" && \
+                phone.getContact(index).getNickname() != "" && \
+                phone.getContact(index).getPhoneNumber() != "" && \
+                phone.getContact(index).getDarkestSecret() != ""))
     {   
         std::string index_s = "";
         while (index_s == "")
         {
             std::cout << "Enter index: ";
             std::getline(std::cin, index_s);
-            if (index_s == "")
+            if (feof(stdin))
+            {
+                std::cin.clear();
+                std::clearerr(stdin);
+                std::cout << std::endl;
+                continue;
+            }
+            else if (index_s == "")
                 std::cout << "Invalid index" << std::endl;
             continue;
         }
@@ -149,7 +199,11 @@ void PhoneBook::searchCommand(PhoneBook &phone) {
             std::cout << "the range available is from 1 to 8" << std::endl;
             continue;
         }
-        else if (phone.getContact(index - 1).getFirstName() != "" && phone.getContact(index - 1).getLastName() != "" && phone.getContact(index - 1).getNickname() != "" && phone.getContact(index - 1).getPhoneNumber() != "" && phone.getContact(index - 1).getDarkestSecret() != "")
+        else if (phone.getContact(index - 1).getFirstName() != "" && \
+                    phone.getContact(index - 1).getLastName() != "" && \
+                    phone.getContact(index - 1).getNickname() != "" && \
+                    phone.getContact(index - 1).getPhoneNumber() != "" && \
+                    phone.getContact(index - 1).getDarkestSecret() != "")
         {
             std::cout << "first name : " << phone.getContact(index - 1).getFirstName() << std::endl;
             std::cout << "last name : " << phone.getContact(index - 1).getLastName() << std::endl;
@@ -173,15 +227,15 @@ Contact PhoneBook::getContact(int index) {
 void PhoneBook::searchContact(int index) {
     std::cout << "Searching contact" << std::endl;
 
-    std::cout << "First name: " << PhoneBook::_contacts[index].getFirstName() << std::endl;
-    std::cout << "Last name: " << PhoneBook::_contacts[index].getLastName() << std::endl;
-    std::cout << "Nickname: " << PhoneBook::_contacts[index].getNickname() << std::endl;
-    std::cout << "Phone number: " << PhoneBook::_contacts[index].getPhoneNumber() << std::endl;
+    std::cout << "First name: " \
+                << PhoneBook::_contacts[index].getFirstName() << std::endl;
+    std::cout << "Last name: " \
+                << PhoneBook::_contacts[index].getLastName() << std::endl;
+    std::cout << "Nickname: " \
+                << PhoneBook::_contacts[index].getNickname() << std::endl;
+    std::cout << "Phone number: " \
+                << PhoneBook::_contacts[index].getPhoneNumber() << std::endl;
 
-}
-
-void PhoneBook::printContactField(std::string field) {
-    std::cout << field << std::endl;
 }
 
 void PhoneBook::exit() {
@@ -190,12 +244,12 @@ void PhoneBook::exit() {
 
 bool is_number(std::string str) {
     for (unsigned long i = 0; i < str.length(); i++) {
-        if (!isdigit(str[i])) {
-            return false;
-        }
+        if (!isdigit(str[i]))
+            return (false);
     }
-    return true;
+    return (true);
 }
+
 
 int main() {
     PhoneBook phone;
@@ -213,6 +267,13 @@ int main() {
             std::cout << "-------------------------------------------" << std::endl;
             std::cout << "Enter a command: ";
             getline(std::cin, command);
+            if (feof(stdin))
+            {
+                std::cin.clear();
+                std::clearerr(stdin);
+                std::cout << std::endl;
+                continue;
+            }
             if (command != "ADD" && command != "SEARCH" && command != "EXIT")
             {
                 std::cout << "                                   ";
@@ -235,8 +296,6 @@ int main() {
             phone.searchCommand(phone);
             continue;
         }
-        // std::cin.clear();
-        // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     return (0);
 }
