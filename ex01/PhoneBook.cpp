@@ -6,7 +6,7 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:17:06 by azgaoua           #+#    #+#             */
-/*   Updated: 2024/01/14 11:10:02 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/15 11:35:48 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ void PhoneBook::printWelcome() {
     std::cout << "                                   ";
     std::cout << "------->> Welcome to the PhoneBook <<-------" << std::endl;
 }
+
 PhoneBook::PhoneBook() {
     _nb_contacts = 0;
 }
+
 void PhoneBook::addContact(Contact contact) {
     std::string first_name;
     std::string last_name;
@@ -27,10 +29,11 @@ void PhoneBook::addContact(Contact contact) {
     std::string darkest_secret;
     static int _nbContacts = 1;
 
-    while (first_name == "")
-    {
+    while (first_name == "") {
         std::cout << "Enter first name: ";
         std::getline(std::cin, first_name);
+        while (first_name[0] == ' ' || first_name[0] == '\t')
+            first_name.erase(0, 1);
         if (feof(stdin))
         {
             std::cin.clear();
@@ -46,6 +49,8 @@ void PhoneBook::addContact(Contact contact) {
     {
         std::cout << "Enter last name: ";
         std::getline(std::cin, last_name);
+        while (last_name[0] == ' ' || last_name[0] == '\t')
+            last_name.erase(0, 1);
         if (feof(stdin))
         {
             std::cin.clear();
@@ -61,6 +66,8 @@ void PhoneBook::addContact(Contact contact) {
     {
         std::cout << "Enter nickname: ";
         std::getline(std::cin, nickname);
+        while (nickname[0] == ' ' || nickname[0] == '\t')
+            nickname.erase(0, 1);
         if (feof(stdin))
         {
             std::cin.clear();
@@ -76,6 +83,8 @@ void PhoneBook::addContact(Contact contact) {
     {
         std::cout << "Enter phone number: ";
         std::getline(std::cin, phone_number);
+        while (phone_number[0] == ' ' || phone_number[0] == '\t')
+            phone_number.erase(0, 1);
         if (feof(stdin))
         {
             std::cin.clear();
@@ -91,6 +100,8 @@ void PhoneBook::addContact(Contact contact) {
     {
         std::cout << "Enter darkest secret: ";
         std::getline(std::cin, darkest_secret);
+        while (darkest_secret[0] == ' ' || darkest_secret[0] == '\t')
+            darkest_secret.erase(0, 1);
         if (feof(stdin))
         {
             std::cin.clear();
@@ -299,5 +310,3 @@ int main() {
     }
     return (0);
 }
-
-

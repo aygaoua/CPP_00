@@ -6,14 +6,18 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:19:41 by azgaoua           #+#    #+#             */
-/*   Updated: 2023/12/30 18:20:09 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/15 09:24:03 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
 Contact::Contact() {
-    // std::cout << "Contact created" << std::endl;
+    this->_first_name = "";
+    this->_last_name = "";
+    this->_nickname = "";
+    this->_phone_number = "";
+    this->_darkest_secret = "";
 }
 
 void Contact::setFirstName(std::string first_name) {
@@ -55,12 +59,3 @@ std::string Contact::getPhoneNumber(){
 std::string Contact::getDarkestSecret() {
     return this->_darkest_secret;
 }
-
-Contact::~Contact() {
-    // std::cout << "Contact destroyed" << std::endl;
-}
-
-// int main() {
-//     Contact contact;
-//     return 0;
-// }

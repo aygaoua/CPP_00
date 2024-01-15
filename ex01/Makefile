@@ -6,7 +6,7 @@
 #    By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/24 03:45:56 by azgaoua           #+#    #+#              #
-#    Updated: 2024/01/09 19:58:40 by azgaoua          ###   ########.fr        #
+#    Updated: 2024/01/14 11:24:39 by azgaoua          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OBJS = Contact.o Phonebook.o
 
 FILES = Contact.cpp Phonebook.cpp
 
-CXX = g++
+CXX = c++
 
 RM = rm -rf
 

@@ -6,7 +6,7 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:19:23 by azgaoua           #+#    #+#             */
-/*   Updated: 2023/12/30 01:23:18 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/15 09:24:06 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ private:
     std::string _darkest_secret;
 public:
     Contact();
-    ~Contact();
     void setFirstName(std::string first_name);
     void setLastName(std::string last_name);
     void setNickname(std::string nickname);
