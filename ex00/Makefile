@@ -6,7 +6,7 @@
 #    By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/24 03:22:12 by azgaoua           #+#    #+#              #
-#    Updated: 2023/12/24 03:22:14 by azgaoua          ###   ########.fr        #
+#    Updated: 2024/01/14 11:24:42 by azgaoua          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OBJS = megaphone.o
 
 FILES = megaphone.cpp
 
-CXX = g++
+CXX = c++
 
 RM = rm -rf
 
