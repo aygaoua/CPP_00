@@ -6,16 +6,22 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:17:06 by azgaoua           #+#    #+#             */
-/*   Updated: 2024/01/16 16:55:39 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/16 17:08:45 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
+/*-----------------------------NON CLASS MEMBERS-----------------------------*/
+
+/*1*/
+
 void printWelcome(void) {
 	std::cout << "                                   ";
 	std::cout << "------->> Welcome to the PhoneBook <<-------" << std::endl;
 }
+
+/*2*/
 
 bool is_number(std::string str) {
 	if (str[0] == '+')
@@ -26,10 +32,17 @@ bool is_number(std::string str) {
 	}
 	return (true);
 }
+/* ************************************************************************** */
+
+/*-----------------------------CLASS MEMBERS-----------------------------*/
+
+/*1*/
 
 PhoneBook::PhoneBook() {
 	_nb_contacts = 0;
 }
+
+/*2*/
 
 void PhoneBook::addContact(Contact contact) {
 	std::string first_name;
@@ -132,9 +145,13 @@ void PhoneBook::addContact(Contact contact) {
 	_nbContacts++;
 }
 
+/*3*/
+
 int PhoneBook::getNbContacts() {
 	return this->_nb_contacts;
 }
+
+/*4*/
 
 void PhoneBook::searchCommand(PhoneBook &phone) {
 	int index = 0;
@@ -231,9 +248,13 @@ void PhoneBook::searchCommand(PhoneBook &phone) {
 	}
 }
 
+/*5*/
+
 Contact PhoneBook::getContact(int index) {
 	return this->_contacts[index];
 }
+
+/*6*/
 
 void PhoneBook::searchContact(int index) {
 	std::cout << "Searching contact" << std::endl;
@@ -249,6 +270,9 @@ void PhoneBook::searchContact(int index) {
 
 }
 
+/*7*/
+
 void PhoneBook::exit() {
 	std::cout << "Exiting PhoneBook" << std::endl;
 }
+/* ************************************************************************** */
