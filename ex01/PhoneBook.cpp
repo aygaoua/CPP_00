@@ -6,7 +6,7 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:17:06 by azgaoua           #+#    #+#             */
-/*   Updated: 2024/01/15 11:35:48 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/16 09:36:10 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 void PhoneBook::printWelcome() {
     std::cout << "                                   ";
     std::cout << "------->> Welcome to the PhoneBook <<-------" << std::endl;
+}
+
+bool is_number(std::string str) {
+    if (str[0] == '+')
+        str.erase(0, 1);
+    for (unsigned long i = 0; i < str.length(); i++) {
+        if (!isdigit(str[i]) && str[i] != ' ')
+            return (false);
+    }
+    return (true);
 }
 
 PhoneBook::PhoneBook() {
@@ -79,7 +89,7 @@ void PhoneBook::addContact(Contact contact) {
             std::cout << "Invalid nickname" << std::endl;
     }
     contact.setNickname(nickname);
-    while (phone_number == "")
+    while (phone_number == "" || !is_number(phone_number))
     {
         std::cout << "Enter phone number: ";
         std::getline(std::cin, phone_number);
@@ -92,7 +102,7 @@ void PhoneBook::addContact(Contact contact) {
             std::cout << std::endl;
             continue;
         }
-        else if (phone_number == "")
+        else if (phone_number == "" || !is_number(phone_number))
             std::cout << "Invalid phone number" << std::endl;
     }
     contact.setPhoneNumber(phone_number);
@@ -252,15 +262,6 @@ void PhoneBook::searchContact(int index) {
 void PhoneBook::exit() {
     std::cout << "Exiting PhoneBook" << std::endl;
 }
-
-bool is_number(std::string str) {
-    for (unsigned long i = 0; i < str.length(); i++) {
-        if (!isdigit(str[i]))
-            return (false);
-    }
-    return (true);
-}
-
 
 int main() {
     PhoneBook phone;
