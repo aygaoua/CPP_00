@@ -13,6 +13,7 @@
 #include <iostream>
 #include <string>
 #include <csignal>
+#include <cstdio>
 #include "Contact.hpp"
 #ifndef PHONEBOOK_HPP
 #define PHONEBOOK_HPP
