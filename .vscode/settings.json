@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "phonebook.hpp": "c",
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp"
+    },
+    "cSpell.words": [
+        "azgaoua",
+        "PHONEBOOK"
+    ]
+}

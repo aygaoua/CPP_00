@@ -6,15 +6,15 @@
 #    By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/24 03:45:56 by azgaoua           #+#    #+#              #
-#    Updated: 2024/01/14 11:24:39 by azgaoua          ###   ########.fr        #
+#    Updated: 2024/01/16 10:06:53 by azgaoua          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = phonebook
 
-OBJS = Contact.o PhoneBook.o
+OBJS = Contact.o PhoneBook.o main.o
 
-FILES = Contact.cpp PhoneBook.cpp
+FILES = Contact.cpp PhoneBook.cpp main.cpp
 
 CXX = c++
 
