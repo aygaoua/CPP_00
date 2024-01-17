@@ -6,7 +6,7 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 02:24:17 by azgaoua           #+#    #+#             */
-/*   Updated: 2023/12/27 21:27:28 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/17 13:43:37 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int ac, char **av)
 			for (int k = 1; k < ac; k++) {
 				std::string str(av[k]);
 				for (size_t i = 0; i < str.length(); i++)
-					str[i] = toupper(str[i]);
+					str[i] = std::toupper(str[i]);
 				std::cout << str;
 			}
 			std::cout << std::endl;
