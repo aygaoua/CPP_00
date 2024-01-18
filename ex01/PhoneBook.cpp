@@ -6,7 +6,7 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:17:06 by azgaoua           #+#    #+#             */
-/*   Updated: 2024/01/17 10:18:28 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/18 14:38:55 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,23 @@ void printWelcome(void) {
 
 /*2*/
 
+bool valid(std::string str) {
+	for (unsigned long i = 0; i < str.length(); i++) {
+		if (str[i] == '\t')
+			return (false);
+	}
+	return (true);
+}
+
+/*3*/
+
 bool is_number(std::string str) {
 	if (str[0] == '+')
 		str.erase(0, 1);
-	if (!isdigit(str[0]))
+	if (!std::isdigit(str[0]))
 		return (false);
 	for (unsigned long i = 0; i < str.length(); i++) {
-		if (!isdigit(str[i]) && str[i] != ' ')
+		if (!std::isdigit(str[i]) && str[i] != ' ')
 			return (false);
 	}
 	return (true);
@@ -57,54 +67,63 @@ void PhoneBook::addContact(Contact contact) {
 	while (first_name == "") {
 		std::cout << "Enter first name: ";
 		std::getline(std::cin, first_name);
-		while (isspace(first_name[0]))
+		while (std::isspace(first_name[0]))
 			first_name.erase(0, 1);
-		if (feof(stdin)) {
+		if (std::feof(stdin)) {
 			std::cin.clear();
 			std::clearerr(stdin);
 			std::cout << std::endl;
 			continue;
 		}
-		else if (first_name == "")
+		else if (first_name == "" || valid(first_name) == false)
+		{
 			std::cout << "Invalid first name" << std::endl;
+			first_name = "";
+		}
 	}
 	contact.setFirstName(first_name);
 	while (last_name == "") {
 		std::cout << "Enter last name: ";
 		std::getline(std::cin, last_name);
-		while (isspace(last_name[0]))
+		while (std::isspace(last_name[0]))
 			last_name.erase(0, 1);
-		if (feof(stdin)) {
+		if (std::feof(stdin)) {
 			std::cin.clear();
 			std::clearerr(stdin);
 			std::cout << std::endl;
 			continue;
 		}
-		else if (last_name == "")
+		else if (last_name == "" || valid(last_name) == false)
+		{
 			std::cout << "Invalid last name" << std::endl;
+			last_name = "";
+		}
 	}
 	contact.setLastName(last_name);
 	while (nickname == "") {
 		std::cout << "Enter nickname: ";
 		std::getline(std::cin, nickname);
-		while (isspace(nickname[0]))
+		while (std::isspace(nickname[0]))
 			nickname.erase(0, 1);
-		if (feof(stdin)) {
+		if (std::feof(stdin)) {
 			std::cin.clear();
 			std::clearerr(stdin);
 			std::cout << std::endl;
 			continue;
 		}
-		else if (nickname == "")
+		else if (nickname == "" || valid(nickname) == false)
+		{
 			std::cout << "Invalid nickname" << std::endl;
+			nickname = "";
+		}
 	}
 	contact.setNickname(nickname);
 	while (phone_number == "" || !is_number(phone_number)) {
 		std::cout << "Enter phone number: ";
 		std::getline(std::cin, phone_number);
-		while (isspace(phone_number[0]))
+		while (std::isspace(phone_number[0]))
 			phone_number.erase(0, 1);
-		if (feof(stdin)) {
+		if (std::feof(stdin)) {
 			std::cin.clear();
 			std::clearerr(stdin);
 			std::cout << std::endl;
@@ -114,7 +133,7 @@ void PhoneBook::addContact(Contact contact) {
 			std::cout << "Invalid phone number" << std::endl;
 		else {
 			for (unsigned long i = 0; i < phone_number.length(); i++) {
-				if (isspace(phone_number[i])) {
+				if (std::isspace(phone_number[i])) {
 					phone_number.erase(i, 1);
 					i--;
 				}
@@ -125,9 +144,9 @@ void PhoneBook::addContact(Contact contact) {
 	while (darkest_secret == "") {
 		std::cout << "Enter darkest secret: ";
 		std::getline(std::cin, darkest_secret);
-		while (isspace(darkest_secret[0]))
+		while (std::isspace(darkest_secret[0]))
 			darkest_secret.erase(0, 1);
-		if (feof(stdin)) {
+		if (std::feof(stdin)) {
 			std::cin.clear();
 			std::clearerr(stdin);
 			std::cout << std::endl;
@@ -191,9 +210,11 @@ void PhoneBook::searchCommand(PhoneBook &phone) {
 		while (index_s == "") {
 			std::cout << "Enter index: ";
 			std::getline(std::cin, index_s);
-			while (isspace(index_s[0]))
+			if (index_s[0] == '+')
 				index_s.erase(0, 1);
-			if (feof(stdin)) {
+			while (std::isspace(index_s[0]) || index_s[0] == '0')
+				index_s.erase(0, 1);
+			if (std::feof(stdin)) {
 				std::cin.clear();
 				std::clearerr(stdin);
 				std::cout << std::endl;

@@ -6,15 +6,13 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:16:44 by azgaoua           #+#    #+#             */
-/*   Updated: 2024/01/17 09:57:56 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/18 14:08:00 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include <csignal>
 #include <iomanip>
-#include <cstdio>
 #include "Contact.hpp"
 #ifndef PHONEBOOK_HPP
 #define PHONEBOOK_HPP
@@ -38,5 +36,6 @@ public:
 
 void printWelcome(void);
 bool is_number(std::string str);
+bool valid(std::string str);
 
 #endif
