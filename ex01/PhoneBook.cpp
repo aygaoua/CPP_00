@@ -6,7 +6,7 @@
 /*   By: azgaoua <azgaoua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 15:17:06 by azgaoua           #+#    #+#             */
-/*   Updated: 2024/01/18 14:38:55 by azgaoua          ###   ########.fr       */
+/*   Updated: 2024/01/18 15:50:04 by azgaoua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ void PhoneBook::searchCommand(PhoneBook &phone) {
 				std::cout << "Invalid index" << std::endl;
 			continue;
 		}
-		if (!isdigit(index_s[0]) || index_s.length() != 1) {
+		if (!std::isdigit(index_s[0]) || index_s.length() != 1) {
 			std::cout << "Invalid index" << std::endl;
 			std::cout << "the range available is from 1 to 8" << std::endl;
 			continue;
